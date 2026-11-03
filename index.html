@@ -3,26 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b4f4a">
+<meta name="theme-color" content="#ffffff">
 <title>Condomínio Lícia M. Santiago</title>
 <style>
-:root{--verde:#0b4f4a;--verde2:#1f8a7d;--tint:#e6f0ee;--fundo:#f4f6f5;--card:#fff;--texto:#16262a;--suave:#5f7075;--borda:#e1e7e5;--ok:#166534;--okbg:#e3f4e8;--av:#8a5a00;--avbg:#fbf0d4;--no:#9f1c1c;--nobg:#fbe4e4}
+:root{--verde:#1d5fd1;--verde2:#5b93ee;--tint:#e8f0fd;--fundo:#f3f6fb;--card:#fff;--texto:#14213d;--suave:#5b6b82;--borda:#e1e8f2;--ok:#166534;--okbg:#e3f4e8;--av:#8a5a00;--avbg:#fbf0d4;--no:#9f1c1c;--nobg:#fbe4e4}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--fundo);color:var(--texto);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
 .ic{flex:none;vertical-align:middle}
-header.top{background:var(--verde);color:#fff;padding:14px 16px;padding-top:max(14px,env(safe-area-inset-top));position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px}
-header.top a.voltar{color:#fff;text-decoration:none;width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center}
-header.top h1{font-size:17px;margin:0;font-weight:600;letter-spacing:.1px}
-header.top .sub{font-size:12px;opacity:.75;font-weight:400;display:block;letter-spacing:.4px;text-transform:uppercase}
+header.top{background:#fff;color:var(--texto);padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;box-shadow:0 1px 0 var(--borda),0 4px 16px rgba(20,33,61,.04)}
+header.top a.voltar{color:var(--verde);text-decoration:none;width:38px;height:38px;border-radius:11px;background:var(--tint);display:flex;align-items:center;justify-content:center}
+header.top h1{font-size:18px;margin:0;font-weight:650;letter-spacing:-.1px;line-height:1.2}
+header.top .sub{font-size:11.5px;color:var(--suave);font-weight:500;display:block;letter-spacing:.4px;text-transform:uppercase}
+header.top .logo{color:var(--verde);display:flex}
+header.top .vdiv{width:1px;height:34px;background:var(--borda)}
 main{max-width:640px;margin:0 auto;padding:18px 16px 40px}
-.hero{padding:6px 2px 18px}
-.hero h2{margin:0 0 2px;font-size:24px;font-weight:650;letter-spacing:-.2px}
-.hero p{margin:0;color:var(--suave);font-size:15px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tile{display:flex;flex-direction:column;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--borda);border-radius:16px;padding:16px;text-decoration:none;color:var(--texto);min-height:132px}
-.tile:active{background:#f0f4f3}
-.tile .t{font-weight:600;font-size:15.5px;line-height:1.25}
-.tile .s{font-size:13px;color:var(--suave);margin-top:2px;line-height:1.3}
+.hero{text-align:center;padding:10px 0 2px}
+.hero h2{margin:0;font-size:26px;font-weight:700;letter-spacing:-.3px}
+.hero h2::after{content:"";display:block;width:44px;height:3px;background:var(--verde);border-radius:3px;margin:10px auto 0}
+.hero p{margin:12px 0 0;color:var(--suave);font-size:15px}
+.busca{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--borda);border-radius:14px;padding:0 14px;margin:18px 0 18px;box-shadow:0 2px 10px rgba(20,33,61,.05)}
+.busca .ic{color:var(--suave)}
+.busca input{border:0;border-radius:0;padding:15px 0;background:transparent;outline:none;font-size:16px}
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:520px){.grid{grid-template-columns:1fr 1fr}}
+.tile{display:flex;flex-direction:row;align-items:center;gap:14px;background:var(--card);border:1px solid var(--borda);border-radius:16px;padding:14px 16px;text-decoration:none;color:var(--texto);box-shadow:0 1px 2px rgba(20,33,61,.04),0 6px 16px rgba(20,33,61,.04)}
+.tile:active{background:#eef3fc}
+.tile .tx{flex:1;min-width:0}
+.tile .chev{color:#9aa8bd;display:flex}
+.tile .t{font-weight:650;font-size:16px;line-height:1.25}
+.tile .s{font-size:13.5px;color:var(--suave);margin-top:2px;line-height:1.3}
 .chipic{width:44px;height:44px;border-radius:12px;background:var(--tint);color:var(--verde);display:flex;align-items:center;justify-content:center;flex:none}
 .chipic.sm{width:36px;height:36px;border-radius:10px}
 .card{background:var(--card);border:1px solid var(--borda);border-radius:16px;padding:16px;margin:0 0 12px}
@@ -59,7 +68,7 @@ label{display:block;font-size:13.5px;font-weight:600;margin:12px 0 4px;color:#33
 .aviso.av{background:var(--avbg);color:#5f3d00}
 .aviso.ok{background:var(--okbg);color:#14532d}
 .aviso.no{background:var(--nobg);color:#7f1d1d}
-.aviso.info{background:var(--tint);color:#133f3b}
+.aviso.info{background:var(--tint);color:#1b3a6b}
 details.tema{background:#fff;border:1px solid var(--borda);border-radius:16px;margin-bottom:10px;overflow:hidden}
 details.tema summary{padding:14px 16px;font-weight:600;cursor:pointer;list-style:none;display:flex;gap:12px;align-items:center}
 details.tema summary::-webkit-details-marker{display:none}
@@ -80,6 +89,9 @@ details.tema .corpo{padding:0 16px 8px}
 .hrow b{display:block;font-size:15px}
 .hrow span{font-size:14px;color:var(--suave)}
 h3.sec{margin:20px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--suave);font-weight:650}
+.pend{display:inline-block;margin-top:4px;font-size:12.5px;font-weight:650;color:var(--av);background:var(--avbg);padding:3px 10px;border-radius:99px}
+.card.conf{border-color:#b9cff7;background:#f4f8ff}
+.msgbox{white-space:pre-wrap;background:#fff;border:1px solid var(--borda);border-radius:12px;padding:12px;font-size:14px;line-height:1.45;max-height:260px;overflow:auto}
 .rodape{text-align:center;color:var(--suave);font-size:12.5px;margin-top:24px}
 </style>
 </head>
@@ -103,6 +115,11 @@ const CONFIG = {
   /* Links dos documentos (Google Drive, por exemplo, com "qualquer pessoa com o link"). */
   linkCartilha: "",
   linkRegulamento: "",
+
+  /* Nome do grupo de reservas (aparece nas instruções depois que o morador salva) e,
+     se quiser, o link de convite do grupo (WhatsApp → grupo → Convidar via link). */
+  nomeGrupoReservas: "Reservas - Quiosque",
+  linkGrupoReservas: "",
 
   /* OPCIONAL – agenda compartilhada pelo Google Planilhas.
      Cole aqui o link CSV da planilha publicada.
@@ -218,6 +235,7 @@ const IC={
  av:'<path d="M12 3 2 20h20z"/><path d="M12 10v5M12 18v.5"/>',
  no:'<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5"/>',
+ predio:'<path d="M4 21V10l6-4 6 4v11"/><path d="M16 21V8l4-2v15M2 21h20M8 14h2M8 17h2"/>',
  voltar:'<path d="m15 18-6-6 6-6"/>',
  prev:'<path d="m15 18-6-6 6-6"/>',
  prox:'<path d="m9 18 6-6-6-6"/>'
@@ -232,13 +250,22 @@ const hoje=new Date();
 const st={ano:hoje.getFullYear(),mes:hoje.getMonth(),filtro:"Todos",dia:null};
 let reservas=RESERVAS.slice();
 let statusAgenda="";
+let locais=[];try{locais=JSON.parse(localStorage.getItem("reservasLocais")||"[]")}catch(e){}
+function salvarLocais(){try{localStorage.setItem("reservasLocais",JSON.stringify(locais))}catch(e){}}
+let confirmacao=null,lastRoute=null;
+/* reservas confirmadas (arquivo/planilha) + as salvas neste celular aguardando confirmação */
+function todas(){
+  const out=reservas.slice();
+  locais.forEach(l=>{if(!reservas.some(r=>r.data===l.data&&r.espaco===l.espaco&&r.inicio===l.inicio))out.push(l)});
+  return out;
+}
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const pad=n=>String(n).padStart(2,"0");
 const key=(y,m,d)=>y+"-"+pad(m+1)+"-"+pad(d);
 const br=iso=>iso.split("-").reverse().join("/");
-const norm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const norm=s=>String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
 const digits=s=>String(s).replace(/\D/g,"");
 function numWa(n){let d=digits(n);if(d&&d.length<=11)d="55"+d;return d}
 function waLink(text,num){return "https://wa.me/"+(num?numWa(num):"")+"?text="+encodeURIComponent(text)}
@@ -272,18 +299,22 @@ function render(){
   const view={"":vHome,agenda:vAgenda,contatos:vContatos,regras:vRegras,buscar:vBuscar,agora:vAgora,docs:vDocs}[r]||vHome;
   const home=r===""||!TITULOS.hasOwnProperty(r);
   $("app").innerHTML=
-   '<header class="top">'+(home?'':'<a class="voltar" href="#/" aria-label="Voltar ao início">'+ic("voltar",22)+'</a>')+
+   '<header class="top">'+(home?'<span class="logo">'+ic("predio",34)+'</span><span class="vdiv"></span>':'<a class="voltar" href="#/" aria-label="Voltar ao início">'+ic("voltar",22)+'</a>')+
    '<h1>'+(home?'<span class="sub">Portal do morador</span>'+esc(CONFIG.nome):esc(TITULOS[r]))+'</h1></header><main>'+view()+
    '<div class="rodape">Informações da Cartilha de Boa Convivência · Atualizado em '+esc(CONFIG.atualizadoEm)+'</div></main>';
-  window.scrollTo(0,0);
+  if(r!=="agenda")confirmacao=null;
+  if(r!==lastRoute){window.scrollTo(0,0);lastRoute=r}
   if(r==="buscar")buscar();
 }
 window.addEventListener("hashchange",render);
 
 /* ---------- Início ---------- */
-function tile(rota,icone,t,s){return '<a class="tile" href="#/'+rota+'">'+chipic(icone)+'<div><div class="t">'+t+'</div><div class="s">'+s+'</div></div></a>'}
+function tile(rota,icone,t,s){return '<a class="tile" href="#/'+rota+'">'+chipic(icone)+'<div class="tx"><div class="t">'+t+'</div><div class="s">'+s+'</div></div><span class="chev">'+ic("prox",20)+'</span></a>'}
+let buscaInicial="";
+function irBuscar(){buscaInicial=$("hq").value.trim();location.hash="#/buscar"}
 function vHome(){
-  return '<div class="hero"><h2>Como podemos ajudar?</h2><p>Toque no assunto que você procura.</p></div>'+
+  return '<div class="hero"><h2>Como podemos ajudar?</h2><p>Encontre informações e serviços do condomínio.</p></div>'+
+  '<div class="busca">'+ic("buscar",22)+'<input id="hq" type="search" enterkeyhint="search" placeholder="O que você procura?" onkeydown="if(event.key===\'Enter\')irBuscar()" autocomplete="off"></div>'+
   '<div class="grid">'+
   tile("agenda","agenda","Agenda e reservas","Salão e quiosques")+
   tile("contatos","contatos","Horários e contatos","Ligar com um toque")+
@@ -298,11 +329,38 @@ function vHome(){
 function mudarMes(d){st.mes+=d;if(st.mes<0){st.mes=11;st.ano--}if(st.mes>11){st.mes=0;st.ano++}st.dia=null;render()}
 function setMesAno(){st.mes=+$("selMes").value;st.ano=+$("selAno").value;st.dia=null;render()}
 function setFiltro(f){st.filtro=f;render()}
-function setDia(k){st.dia=(st.dia===k)?null:k;render()}
+function setDia(k){st.dia=(st.dia===k)?null:k;render();const e=$("listaRes");if(e&&st.dia)e.scrollIntoView({behavior:"smooth",block:"start"})}
+function itemRes(r){
+  return '<div class="res-item"><b>'+esc(r.espaco)+'</b>'+br(r.data)+' · '+esc(r.inicio)+' às '+esc(r.fim)+
+   (r.quem?'<br><span class="muted">'+esc(r.quem)+'</span>':'')+(r.obs?'<br><span class="muted">'+esc(r.obs)+'</span>':'')+
+   (r.local?'<br><span class="pend">Aguardando confirmação do síndico</span><div class="muted" style="margin-top:4px">Aparece só neste celular até o síndico confirmar no grupo.</div><button class="chip" style="margin-top:8px" onclick="removerLocal('+r.id+')">Cancelar esta reserva</button>':'')+'</div>';
+}
+function removerLocal(id){if(!confirm("Cancelar esta reserva?"))return;locais=locais.filter(r=>r.id!==id);salvarLocais();confirmacao=null;render()}
+function msgMes(ano,mes,nova){
+  const pre=ano+"-"+pad(mes+1);
+  const l=todas().filter(r=>r.data.indexOf(pre)===0).sort((a,b)=>(a.data+a.inicio).localeCompare(b.data+b.inicio));
+  let t="*Reservas de "+MESES[mes]+" de "+ano+"*\n\n";
+  if(nova)t+="*Nova reserva:* "+nova.espaco+", dia "+br(nova.data)+", das "+nova.inicio+" às "+nova.fim+" ("+nova.quem+")"+(nova.obs?" – "+nova.obs:"")+"\nSíndico, pode confirmar?\n\n";
+  t+="*Agenda do mês:*\n"+(l.length?l.map(r=>"• "+br(r.data).slice(0,5)+" · "+r.inicio+"–"+r.fim+" · "+r.espaco+(r.quem?" · "+r.quem:"")+(r.local?" (a confirmar)":"")).join("\n"):"Nenhuma reserva.");
+  return t;
+}
+function cardConfirmacao(){
+  if(!confirmacao)return"";
+  return '<div class="card conf"><div class="cardhead">'+chipic("ok",true)+'<h3>Reserva salva!</h3></div>'+
+  '<p style="margin:0 0 8px">Falta só um passo: envie a mensagem abaixo no grupo <b>'+esc(CONFIG.nomeGrupoReservas)+'</b> para o síndico confirmar. Ela já leva a agenda do mês.</p>'+
+  '<div class="msgbox">'+esc(confirmacao.texto)+'</div>'+
+  '<div class="row"><button class="btn zap" onclick="enviarConf()">'+ic("enviar",18)+'Enviar no grupo</button><button class="btn sec" onclick="copiarConf()">'+ic("copiar",18)+'Copiar mensagem</button></div>'+
+  (CONFIG.linkGrupoReservas?'<div class="row"><a class="btn sec" target="_blank" href="'+esc(CONFIG.linkGrupoReservas)+'">Abrir o grupo no WhatsApp</a></div>':'')+
+  '<p class="muted" style="margin:10px 0 0">Ao tocar em <b>Enviar no grupo</b>, o WhatsApp abre: escolha o grupo <b>'+esc(CONFIG.nomeGrupoReservas)+'</b> e toque em enviar.</p>'+
+  '<div class="row"><button class="chip" onclick="fecharConf()">Fechar</button></div></div>';
+}
+function enviarConf(){if(confirmacao)window.open(waLink(confirmacao.texto,""),"_blank")}
+function copiarConf(){if(!confirmacao)return;const t=confirmacao.texto;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>alert("Mensagem copiada! Cole no grupo "+CONFIG.nomeGrupoReservas+".")).catch(()=>prompt("Copie a mensagem:",t))}
+function fecharConf(){confirmacao=null;render()}
 function vAgenda(){
   const anos=[];for(let a=hoje.getFullYear()-1;a<=hoje.getFullYear()+3;a++)anos.push(a);
   const first=new Date(st.ano,st.mes,1).getDay(),n=new Date(st.ano,st.mes+1,0).getDate();
-  const filt=reservas.filter(r=>st.filtro==="Todos"||r.espaco===st.filtro);
+  const filt=todas().filter(r=>st.filtro==="Todos"||r.espaco===st.filtro);
   const map={};filt.forEach(r=>{(map[r.data]=map[r.data]||[]).push(r)});
   let cells=["D","S","T","Q","Q","S","S"].map(x=>'<div class="h">'+x+'</div>').join("");
   for(let i=0;i<first;i++)cells+="<div></div>";
@@ -314,26 +372,26 @@ function vAgenda(){
   const prefixo=st.ano+"-"+pad(st.mes+1);
   const lista=filt.filter(r=>st.dia?r.data===st.dia:r.data.indexOf(prefixo)===0).sort((a,b)=>(a.data+a.inicio).localeCompare(b.data+b.inicio));
   const titLista=st.dia?"Reservas em "+br(st.dia):"Reservas de "+MESES[st.mes]+" de "+st.ano;
-  const itens=lista.length?lista.map(r=>'<div class="res-item"><b>'+esc(r.espaco)+'</b>'+br(r.data)+' · '+esc(r.inicio)+' às '+esc(r.fim)+(r.quem?'<br><span class="muted">'+esc(r.quem)+'</span>':'')+(r.obs?'<br><span class="muted">'+esc(r.obs)+'</span>':'')+'</div>').join(""):
+  const itens=lista.length?lista.map(itemRes).join(""):
     aviso("ok",st.dia?"Nenhuma reserva neste dia.":"Nenhuma reserva neste mês.");
   const chips=["Todos"].concat(ESPACOS).map(f=>'<button class="chip '+(st.filtro===f?"on":"")+'" onclick="setFiltro(\''+f+'\')">'+f+'</button>').join("");
-  return aviso("info","As reservas são feitas <b>somente pelo grupo de WhatsApp</b>. Sem limite por morador e sem taxa. Piscina, parquinho e academia <b>não</b> têm reserva.").replace('class="aviso info"','class="aviso info" style="margin:0 0 14px"')+
+  return cardConfirmacao()+aviso("info","As reservas são feitas <b>somente pelo grupo de WhatsApp</b>. Sem limite por morador e sem taxa. Piscina, parquinho e academia <b>não</b> têm reserva.").replace('class="aviso info"','class="aviso info" style="margin:0 0 14px"')+
   '<div class="chips">'+chips+'</div>'+
   '<div class="nav"><button onclick="mudarMes(-1)" aria-label="Mês anterior">'+ic("prev",22)+'</button>'+
   '<select id="selMes" onchange="setMesAno()">'+MESES.map((m,i)=>'<option value="'+i+'"'+(i===st.mes?" selected":"")+'>'+m+'</option>').join("")+'</select>'+
   '<select id="selAno" onchange="setMesAno()">'+anos.map(a=>'<option'+(a===st.ano?" selected":"")+'>'+a+'</option>').join("")+'</select>'+
   '<button onclick="mudarMes(1)" aria-label="Próximo mês">'+ic("prox",22)+'</button></div>'+
   '<div class="cal">'+cells+'</div>'+
-  '<h3 class="sec">'+titLista+'</h3>'+itens+
+  '<h3 class="sec" id="listaRes">'+titLista+'</h3>'+itens+
   (statusAgenda?'<p class="muted">'+esc(statusAgenda)+'</p>':'')+
-  '<div class="card" style="margin-top:18px"><div class="cardhead">'+chipic("agenda",true)+'<h3>Quero reservar</h3></div><p class="muted" style="margin:0">Preencha e toque em enviar: o WhatsApp abre com a mensagem pronta. Depois é só mandar no grupo de reservas.</p>'+
+  '<div class="card" style="margin-top:18px"><div class="cardhead">'+chipic("agenda",true)+'<h3>Quero reservar</h3></div><p class="muted" style="margin:0">Preencha e toque em <b>Salvar reserva</b>: ela aparece no calendário e você recebe a mensagem pronta para enviar no grupo.</p>'+
   '<label>O que você quer reservar?</label><select id="rs_esp" onchange="checaReserva()">'+ESPACOS.map(e=>'<option>'+e+'</option>').join("")+'</select>'+
-  '<label>Dia</label><input type="date" id="rs_data" onchange="checaReserva()">'+
+  '<label>Dia</label><input type="date" id="rs_data" min="'+key(hoje.getFullYear(),hoje.getMonth(),hoje.getDate())+'" onchange="checaReserva()">'+
   '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><label>Início</label><input type="time" id="rs_ini" onchange="checaReserva()"></div><div><label>Término</label><input type="time" id="rs_fim" onchange="checaReserva()"></div></div>'+
   '<label>Seu nome ou número da casa</label><input id="rs_quem" placeholder="Ex.: Maria – Casa 12" oninput="checaReserva()">'+
   '<label>Observação (opcional)</label><input id="rs_obs" placeholder="Ex.: aniversário, cerca de 30 pessoas">'+
   '<div id="rs_aviso"></div>'+
-  '<div class="row"><button class="btn zap" onclick="enviarReserva()">'+ic("enviar",18)+'Enviar no WhatsApp</button><button class="btn sec" onclick="copiarReserva()">'+ic("copiar",18)+'Copiar mensagem</button></div></div>';
+  '<div class="row"><button class="btn full" style="width:100%" onclick="salvarReserva()">'+ic("ok",18)+'Salvar reserva</button></div></div>';
 }
 function dadosReserva(){return{esp:$("rs_esp").value,data:$("rs_data").value,ini:$("rs_ini").value,fim:$("rs_fim").value,quem:$("rs_quem").value.trim(),obs:$("rs_obs").value.trim()}}
 function checaReserva(){
@@ -341,20 +399,26 @@ function checaReserva(){
   if(d.data&&d.ini&&d.fim){
     if(d.fim<=d.ini)h=aviso("no","O horário de término precisa ser depois do início.");
     else if(d.esp!=="Outro"){
-      const c=reservas.filter(r=>r.espaco===d.esp&&r.data===d.data&&d.ini<r.fim&&r.inicio<d.fim);
+      const c=todas().filter(r=>r.espaco===d.esp&&r.data===d.data&&d.ini<r.fim&&r.inicio<d.fim);
       h=c.length?aviso("av","Já existe reserva neste espaço, neste dia, entre "+esc(c[0].inicio)+" e "+esc(c[0].fim)+". Escolha outro horário."):aviso("ok","Horário livre na agenda.");
     }
   }
   $("rs_aviso").innerHTML=h;
 }
-function textoReserva(){
+function salvarReserva(){
   const d=dadosReserva();
-  if(!d.data||!d.ini||!d.fim||!d.quem){alert("Preencha o dia, o início, o término e seu nome ou casa.");return null}
-  if(d.fim<=d.ini){alert("O horário de término precisa ser depois do início.");return null}
-  return "Olá! Gostaria de reservar: "+d.esp+"\nDia: "+br(d.data)+"\nHorário: das "+d.ini+" às "+d.fim+"\nMorador: "+d.quem+(d.obs?"\nObservação: "+d.obs:"");
+  if(!d.data||!d.ini||!d.fim||!d.quem){alert("Preencha o dia, o início, o término e seu nome ou casa.");return}
+  if(d.fim<=d.ini){alert("O horário de término precisa ser depois do início.");return}
+  if(d.esp!=="Outro"){
+    const c=todas().filter(r=>r.espaco===d.esp&&r.data===d.data&&d.ini<r.fim&&r.inicio<d.fim);
+    if(c.length){alert("Esse espaço já está reservado nesse dia entre "+c[0].inicio+" e "+c[0].fim+". Escolha outro horário.");return}
+  }
+  const nova={data:d.data,inicio:d.ini,fim:d.fim,espaco:d.esp,quem:d.quem,obs:d.obs,local:true,id:Date.now()};
+  locais.push(nova);salvarLocais();
+  const p=d.data.split("-");st.ano=+p[0];st.mes=+p[1]-1;st.dia=d.data;st.filtro="Todos";
+  confirmacao={texto:msgMes(st.ano,st.mes,nova)};
+  render();window.scrollTo(0,0);
 }
-function enviarReserva(){const t=textoReserva();if(t)window.open(waLink(t,""),"_blank")}
-function copiarReserva(){const t=textoReserva();if(!t)return;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>alert("Mensagem copiada! Cole no grupo de reservas.")).catch(()=>prompt("Copie a mensagem:",t))}
 
 /* ---------- Horários e contatos ---------- */
 function vContatos(){
@@ -372,7 +436,8 @@ function vRegras(){
 
 /* ---------- Buscar ---------- */
 function vBuscar(){
-  return '<input id="q" type="search" placeholder="Digite: cachorro, reforma, domingo…" oninput="buscar()" autocomplete="off">'+
+  const v=buscaInicial;buscaInicial="";
+  return '<input id="q" type="search" value="'+esc(v)+'" placeholder="Digite: cachorro, reforma, domingo…" oninput="buscar()" autocomplete="off">'+
   '<div class="chips" style="margin-top:12px;flex-wrap:wrap;overflow:visible">'+SUGESTOES.map(s=>'<button class="chip" onclick="$(\'q\').value=\''+s+'\';buscar()">'+s+'</button>').join("")+'</div><div id="res"></div>';
 }
 function buscar(){
