@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b4f4a">
+<title>Condomínio Lícia M. Santiago</title>
+<style>
+:root{--verde:#0b4f4a;--verde2:#1f8a7d;--tint:#e6f0ee;--fundo:#f4f6f5;--card:#fff;--texto:#16262a;--suave:#5f7075;--borda:#e1e7e5;--ok:#166534;--okbg:#e3f4e8;--av:#8a5a00;--avbg:#fbf0d4;--no:#9f1c1c;--nobg:#fbe4e4}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--fundo);color:var(--texto);font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+.ic{flex:none;vertical-align:middle}
+header.top{background:var(--verde);color:#fff;padding:14px 16px;padding-top:max(14px,env(safe-area-inset-top));position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px}
+header.top a.voltar{color:#fff;text-decoration:none;width:38px;height:38px;border-radius:11px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center}
+header.top h1{font-size:17px;margin:0;font-weight:600;letter-spacing:.1px}
+header.top .sub{font-size:12px;opacity:.75;font-weight:400;display:block;letter-spacing:.4px;text-transform:uppercase}
+main{max-width:640px;margin:0 auto;padding:18px 16px 40px}
+.hero{padding:6px 2px 18px}
+.hero h2{margin:0 0 2px;font-size:24px;font-weight:650;letter-spacing:-.2px}
+.hero p{margin:0;color:var(--suave);font-size:15px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--borda);border-radius:16px;padding:16px;text-decoration:none;color:var(--texto);min-height:132px}
+.tile:active{background:#f0f4f3}
+.tile .t{font-weight:600;font-size:15.5px;line-height:1.25}
+.tile .s{font-size:13px;color:var(--suave);margin-top:2px;line-height:1.3}
+.chipic{width:44px;height:44px;border-radius:12px;background:var(--tint);color:var(--verde);display:flex;align-items:center;justify-content:center;flex:none}
+.chipic.sm{width:36px;height:36px;border-radius:10px}
+.card{background:var(--card);border:1px solid var(--borda);border-radius:16px;padding:16px;margin:0 0 12px}
+.card h3{margin:0 0 6px;font-size:16.5px;font-weight:600}
+.cardhead{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+.cardhead h3{margin:0}
+.muted{color:var(--suave);font-size:14px}
+.fonte{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:12.5px;color:var(--verde);background:var(--tint);padding:3px 10px;border-radius:99px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--verde);color:#fff;border:0;border-radius:12px;padding:13px 16px;font-size:15.5px;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn.sec{background:var(--tint);color:var(--verde)}
+.btn.zap{background:#1b7f4b}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.row .btn{flex:1;min-width:130px}
+input,select,textarea{width:100%;font:inherit;font-size:16px;padding:12px;border:1px solid #cdd6d3;border-radius:12px;background:#fff;color:var(--texto)}
+label{display:block;font-size:13.5px;font-weight:600;margin:12px 0 4px;color:#33464a}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid #cdd6d3;background:#fff;border-radius:99px;padding:8px 14px;font-size:14px;cursor:pointer;font-family:inherit;color:var(--texto)}
+.chip.on{background:var(--verde);color:#fff;border-color:var(--verde)}
+.nav{display:grid;grid-template-columns:48px 1fr 96px 48px;gap:8px;margin-bottom:12px}
+.nav button{border:1px solid #cdd6d3;background:#fff;border-radius:12px;cursor:pointer;color:var(--verde);display:flex;align-items:center;justify-content:center}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal .h{text-align:center;font-size:12px;color:var(--suave);padding:4px 0;font-weight:600}
+.cal .d{aspect-ratio:1;border:1px solid var(--borda);background:#fff;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:15px;cursor:pointer;font-family:inherit;color:var(--texto);padding:0}
+.cal .d.hoje{border-color:var(--verde);border-width:2px;font-weight:700}
+.cal .d.res{background:#fdf3d8}
+.cal .d.sel,.cal .d.res.sel{background:var(--verde);color:#fff}
+.cal .d i{width:5px;height:5px;border-radius:50%;background:#c98a00;margin-top:2px;display:block}
+.cal .d.sel i{background:#fff}
+.res-item{border-left:4px solid var(--verde2);background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;border-top:1px solid var(--borda);border-right:1px solid var(--borda);border-bottom:1px solid var(--borda)}
+.res-item b{display:block}
+.aviso{display:flex;gap:10px;align-items:flex-start;border-radius:12px;padding:11px 12px;margin-top:10px;font-size:14.5px}
+.aviso .ic{margin-top:2px}
+.aviso.av{background:var(--avbg);color:#5f3d00}
+.aviso.ok{background:var(--okbg);color:#14532d}
+.aviso.no{background:var(--nobg);color:#7f1d1d}
+.aviso.info{background:var(--tint);color:#133f3b}
+details.tema{background:#fff;border:1px solid var(--borda);border-radius:16px;margin-bottom:10px;overflow:hidden}
+details.tema summary{padding:14px 16px;font-weight:600;cursor:pointer;list-style:none;display:flex;gap:12px;align-items:center}
+details.tema summary::-webkit-details-marker{display:none}
+details.tema summary::after{content:"";margin-left:auto;width:9px;height:9px;border-right:2px solid var(--suave);border-bottom:2px solid var(--suave);transform:rotate(-45deg);transition:transform .2s}
+details.tema[open] summary::after{transform:rotate(45deg)}
+details.tema .corpo{padding:0 16px 8px}
+.regra{border-top:1px solid var(--borda);padding:12px 0}
+.regra b{display:block;margin-bottom:2px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-weight:650;font-size:13px;padding:4px 11px;border-radius:99px;margin-bottom:8px}
+.badge.ok{background:var(--okbg);color:var(--ok)}
+.badge.av{background:var(--avbg);color:var(--av)}
+.badge.no{background:var(--nobg);color:var(--no)}
+.agora{background:var(--verde);color:#fff;border-radius:16px;padding:14px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:center}
+.agora small{display:block;opacity:.75;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.agora b{font-size:19px;font-weight:600}
+.hrow{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--borda)}
+.hrow:first-child{border-top:0}
+.hrow b{display:block;font-size:15px}
+.hrow span{font-size:14px;color:var(--suave)}
+h3.sec{margin:20px 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--suave);font-weight:650}
+.rodape{text-align:center;color:var(--suave);font-size:12.5px;margin-top:24px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* =====================================================================
+   ÁREA DE EDIÇÃO  (o síndico só precisa mexer nesta parte)
+   Dica: mantenha as aspas e a vírgula no final de cada linha.
+   ===================================================================== */
+
+const CONFIG = {
+  nome: "Condomínio Lícia M. Santiago",
+  atualizadoEm: "novembro de 2026",
+
+  /* WhatsApp do síndico, com DDD. Exemplo: "71999999999". Se deixar vazio,
+     o botão abre o WhatsApp para a pessoa escolher o contato. */
+  whatsappSindico: "",
+
+  /* Links dos documentos (Google Drive, por exemplo, com "qualquer pessoa com o link"). */
+  linkCartilha: "",
+  linkRegulamento: "",
+
+  /* OPCIONAL – agenda compartilhada pelo Google Planilhas.
+     Cole aqui o link CSV da planilha publicada.
+     Se deixar vazio, a página usa a lista RESERVAS logo abaixo. */
+  planilhaReservasCSV: ""
+};
+
+/* RESERVAS (ainda não há nenhuma).
+   Para adicionar, copie uma linha no formato abaixo, sem o "//" no início:
+   Espaços aceitos: "Salão de Festas", "Quiosque maior", "Quiosque menor", "Outro"
+   "quem" e "obs" são opcionais (deixe "" se não quiser mostrar). */
+const RESERVAS = [
+  // { data: "2026-11-21", inicio: "14:00", fim: "22:00", espaco: "Salão de Festas", quem: "", obs: "" },
+];
+
+/* CONTATOS ÚTEIS */
+const CONTATOS = [
+  { nome: "Raimundo", funcao: "Piscineiro", tel: "(71) 99628-5764", obs: "Limpeza da piscina às segundas-feiras e aos sábados." },
+  { nome: "Cabeça", funcao: "Serviço de limpeza", tel: "(71) 99694-5471", obs: "Trabalha às segundas, quartas e sextas, das 17h às 19h." },
+  { nome: "Toninho", funcao: "Eletricista", tel: "(71) 99634-5747", obs: "" }
+];
+
+/* HORÁRIOS (resumo rápido): [ícone, título, texto] */
+const HORARIOS = [
+  ["lixo", "Lixo comum", "Dias úteis até 14h · Sábados até 8h · Domingo: não"],
+  ["reciclar", "Coleta seletiva", "Dias úteis, nos horários regulares de coleta"],
+  ["som", "Silêncio", "Todos os dias, das 22h às 6h"],
+  ["obra", "Obras e barulhos moderados", "Dias úteis, das 8h às 18h"],
+  ["piscina", "Piscina", "Liberada aos sábados a partir das 10h (limpeza às segundas e sábados). Demais horários: quadro de avisos da piscina"],
+  ["limpeza", "Limpeza do condomínio", "Segunda, quarta e sexta, das 17h às 19h"],
+  ["mudanca", "Mudanças", "De preferência de segunda a sábado, pela manhã"],
+  ["taxa", "Taxa de condomínio", "Casas: R$ 200,00 · Casas em construção e terrenos: R$ 170,00 · Vence todo dia 05"]
+];
+
+/* REGRAS por assunto.  t = título · x = texto · f = fonte · p = palavras-chave da busca (sinônimos, sem acento) */
+const REGRAS = [
+  { tema:"Segurança e portões", icone:"seg", itens:[
+    { t:"Portões", x:"Mantenha os portões sempre fechados e travados ao entrar ou sair. Não bloqueie as passagens.", f:"Cartilha, p. 1, item 1", p:"portao portoes fechar trancar travar entrada saida cadeado" },
+    { t:"Visitas e entregadores", x:"Nunca abra para pessoas desconhecidas sem confirmação ou identificação. Entregadores e prestadores de serviço devem ser atendidos pelo próprio morador responsável.", f:"Cartilha, p. 1, item 1", p:"visita visitante estranho desconhecido entregador entrega delivery motoboy ifood pedido prestador" },
+    { t:"Obras e reformas: cadastro de prestadores", x:"Quem tem imóvel em reforma ou construção deve cadastrar antes os prestadores de serviço na administração, orientá-los sobre as regras internas e se responsabilizar pela circulação deles nas áreas comuns.", f:"Cartilha, p. 1, item 1", p:"obra obras reforma construcao pedreiro operario prestador cadastro cadastrar" }
+  ]},
+  { tema:"Áreas comuns e reservas", icone:"festa", itens:[
+    { t:"Como reservar salão de festas e quiosques", x:"A reserva é feita somente pelo grupo de WhatsApp de reservas. Não há limite de reservas por morador e não há cobrança de taxa. Quem não está no grupo deve chamar o síndico no privado para ser adicionado.", f:"Cartilha, p. 1, item 2", p:"reserva reservar festa salao quiosque churrasco aniversario evento grupo taxa valor pagar cobranca" },
+    { t:"Piscina, parquinho e academia", x:"O uso é coletivo. Não é permitido fazer reservas dessas áreas.", f:"Cartilha, p. 1, item 2", p:"piscina parquinho playground academia reserva reservar" },
+    { t:"Economia de energia", x:"Ao terminar de usar o salão ou o quiosque, apague as luzes e desligue freezers, caixas de som, bombas e ventiladores.", f:"Cartilha, p. 1, item 2", p:"luz lampada energia desligar freezer som caixa ventilador bomba" },
+    { t:"Cuidado com o patrimônio e objetos pessoais", x:"Zele pelos bens, móveis e áreas verdes: danos causados de propósito ou por imprudência são de responsabilidade do morador envolvido. Não deixe brinquedos, bicicletas, ferramentas ou outros objetos nas áreas de passagem ou convivência.", f:"Cartilha, p. 1, item 2", p:"dano estragar quebrar patrimonio brinquedo bicicleta bike ferramenta objeto jogado passagem" }
+  ]},
+  { tema:"Lixo e coleta seletiva", icone:"lixo", itens:[
+    { t:"Lixo comum e orgânico", x:"Pode ser colocado nos dias úteis até as 14h e aos sábados até as 8h, em sacos bem fechados. É proibido descartar à tarde, à noite e aos domingos.", f:"Cartilha, p. 2, item 3", p:"lixo organico comum saco horario domingo sabado colocar jogar descartar lixeira" },
+    { t:"Coleta seletiva (recicláveis)", x:"Somente materiais secos e limpos: plástico, papelão, garrafas PET e latas de alumínio. Não misture restos de comida ou resíduos orgânicos. Coleta em dias úteis, nos horários regulares.", f:"Cartilha, p. 2, item 3", p:"reciclavel reciclagem seletiva plastico papelao pet lata aluminio garrafa" },
+    { t:"Entulho e móveis usados", x:"É proibido descartar nas lixeiras comunitárias. Devem ser retirados por caçamba particular contratada pelo responsável.", f:"Cartilha, p. 2, item 3", p:"entulho movel moveis sofa colchao cacamba obra resto construcao geladeira" }
+  ]},
+  { tema:"Animais de estimação", icone:"pet", itens:[
+    { t:"Coleira", x:"Os animais devem circular sempre com guia/coleira e acompanhados por um responsável capaz de contê-los.", f:"Cartilha, p. 2, item 4", p:"pet animal cachorro cao gato coleira guia passear passeio" },
+    { t:"Fezes e urina", x:"Recolher as fezes é dever imediato do tutor: tenha sempre sacos plásticos. Evite que o animal urine em pilares, calçadas de grande circulação, portas, portões e móveis comuns. Se acontecer, lave com água e desinfetante.", f:"Cartilha, p. 2, item 4", p:"coco fezes xixi urina pet cachorro limpar saco recolher" },
+    { t:"Latidos e comportamento", x:"Cuide do bem-estar do pet para evitar latidos excessivos ou agressividade, garantindo a tranquilidade de todos.", f:"Cartilha, p. 2, item 4", p:"latido latir barulho cachorro agressivo agressividade pet" }
+  ]},
+  { tema:"Barulho e obras", icone:"som", itens:[
+    { t:"Dias úteis (horário comercial)", x:"Obras e barulhos moderados são permitidos das 8h às 18h, sempre com bom senso.", f:"Cartilha, p. 2, item 5", p:"obra obras reforma barulho som furadeira martelo horario dia util segunda sexta" },
+    { t:"Silêncio da noite", x:"Silêncio obrigatório todos os dias, das 22h às 6h, respeitando a Lei do Silêncio e o descanso dos vizinhos.", f:"Cartilha, p. 2, item 5", p:"silencio noite madrugada barulho 22h lei descanso dormir" },
+    { t:"Sábado à tarde e domingo", x:"São proibidas atividades com maquinário ou ruídos intensos. Sons altos em residências não são autorizados. Confraternizações só no salão de festas e dentro de limites toleráveis.", f:"Cartilha, p. 2, item 5", p:"sabado domingo tarde barulho som alto maquina maquinario obra reforma festa paredao musica" }
+  ]},
+  { tema:"Piscina", icone:"piscina", itens:[
+    { t:"Horários", x:"A piscina é liberada aos sábados a partir das 10h, pois é limpa às segundas e aos sábados. Os demais horários estão no quadro de avisos da piscina.", f:"Cartilha, p. 3, itens 6 e 9", p:"piscina horario sabado limpeza funcionamento aberta liberada raimundo" },
+    { t:"Higiene", x:"Tome ducha antes de entrar na piscina. Evite óleos bronzeadores e produtos gordurosos antes do mergulho.", f:"Cartilha, p. 3, item 6", p:"piscina ducha banho oleo bronzeador protetor higiene" },
+    { t:"Crianças", x:"Menores de 12 anos devem estar acompanhados por um adulto responsável o tempo todo.", f:"Cartilha, p. 3, item 6", p:"crianca criancas menor filho piscina acompanhado adulto 12 anos" },
+    { t:"Vidro proibido", x:"É proibido usar copos, pratos e garrafas de vidro ao redor da piscina. Use plástico ou acrílico.", f:"Cartilha, p. 3, item 6", p:"vidro copo prato garrafa taca piscina acrilico plastico" },
+    { t:"Visitantes", x:"O acesso de convidados segue o limite definido pela administração e o bom senso, para não sobrecarregar o espaço.", f:"Cartilha, p. 3, item 6", p:"visita visitante convidado piscina limite quantidade" }
+  ]},
+  { tema:"Mudanças", icone:"mudanca", itens:[
+    { t:"Horário de mudança", x:"De preferência de segunda a sábado, pela manhã. Em outros dias e horários, a mudança pode ser feita se não causar ruído.", f:"Cartilha, p. 3, item 10", p:"mudanca mudar caminhao carreto frete horario entrada saida" }
+  ]},
+  { tema:"Taxa de condomínio", icone:"taxa", itens:[
+    { t:"Valores e vencimento", x:"Casas: R$ 200,00 por mês. Casas em construção e terrenos: R$ 170,00 por mês. Vencimento até o dia 05 de cada mês.", f:"Cartilha, p. 3, item 8", p:"taxa condominio mensalidade valor pagar pagamento boleto vencimento terreno construcao 200 170" }
+  ]},
+  { tema:"Boa vizinhança", icone:"vizinho", itens:[
+    { t:"Convivência", x:"Cumprimente vizinhos e funcionários, seja compreensivo com crianças, idosos e pessoas com necessidades especiais, e converse com cordialidade para resolver divergências antes que virem conflito.", f:"Cartilha, p. 3, item 7", p:"vizinho vizinhanca convivencia conflito briga reclamacao respeito educacao" }
+  ]}
+];
+
+/* Atalhos de busca */
+const SUGESTOES = ["cachorro","reforma","domingo","entulho","festa","vidro","mudança","piscina","lixo"];
+
+/* =====================================================================
+   A PARTIR DAQUI É O FUNCIONAMENTO DA PÁGINA (não precisa mexer)
+   ===================================================================== */
+
+/* ---------- Ícones (traço fino) ---------- */
+const IC={
+ agenda:'<rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M8 2.5v4M16 2.5v4M3 10h18"/>',
+ contatos:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+ regras:'<path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/>',
+ buscar:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+ agora:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ docs:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+ seg:'<path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+ festa:'<path d="M8 3h8l-1 7a3 3 0 0 1-6 0z"/><path d="M12 13v8M8 21h8"/>',
+ lixo:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13M9 7V4h6v3"/>',
+ reciclar:'<path d="M7 8h10l-2-3M17 16H7l2 3"/><path d="M4 12a8 8 0 0 1 3-6M20 12a8 8 0 0 1-3 6"/>',
+ pet:'<circle cx="6" cy="10" r="1.8"/><circle cx="10" cy="6" r="1.8"/><circle cx="14" cy="6" r="1.8"/><circle cx="18" cy="10" r="1.8"/><path d="M12 12c-3 0-5 2.5-5 5 0 1.8 1.5 2.5 3 2.2 1-.2 1.4-.4 2-.4s1 .2 2 .4c1.5.3 3-.4 3-2.2 0-2.5-2-5-5-5z"/>',
+ som:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/>',
+ piscina:'<path d="M3 8c2 0 2 1.5 4.5 1.5S10 8 12 8s2.5 1.5 4.5 1.5S19 8 21 8M3 13c2 0 2 1.5 4.5 1.5S10 13 12 13s2.5 1.5 4.5 1.5S19 13 21 13M3 18c2 0 2 1.5 4.5 1.5S10 18 12 18s2.5 1.5 4.5 1.5S19 18 21 18"/>',
+ mudanca:'<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/>',
+ taxa:'<rect x="3" y="6" width="18" height="14" rx="3"/><path d="M3 10h18M16 15h2"/>',
+ vizinho:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 14.2c2.5.2 4.5 2.2 4.5 4.8"/>',
+ obra:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3 17.8V21h3.2l6.3-6.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+ limpeza:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16v4M17 18h4"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>',
+ chat:'<path d="M21 12a8.5 8.5 0 0 1-12.4 7.5L3 21l1.6-5.4A8.5 8.5 0 1 1 21 12z"/>',
+ enviar:'<path d="m22 2-11 11M22 2l-7 20-4-9-9-4z"/>',
+ copiar:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/>',
+ ok:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+ av:'<path d="M12 3 2 20h20z"/><path d="M12 10v5M12 18v.5"/>',
+ no:'<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.5"/>',
+ voltar:'<path d="m15 18-6-6 6-6"/>',
+ prev:'<path d="m15 18-6-6 6-6"/>',
+ prox:'<path d="m9 18 6-6-6-6"/>'
+};
+const ic=(n,s)=>'<svg class="ic" viewBox="0 0 24 24" width="'+(s||20)+'" height="'+(s||20)+'" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(IC[n]||"")+'</svg>';
+const chipic=(n,sm)=>'<span class="chipic'+(sm?' sm':'')+'">'+ic(n,sm?20:24)+'</span>';
+
+const MESES=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+const DIAS=["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+const ESPACOS=["Salão de Festas","Quiosque maior","Quiosque menor","Outro"];
+const hoje=new Date();
+const st={ano:hoje.getFullYear(),mes:hoje.getMonth(),filtro:"Todos",dia:null};
+let reservas=RESERVAS.slice();
+let statusAgenda="";
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,"0");
+const key=(y,m,d)=>y+"-"+pad(m+1)+"-"+pad(d);
+const br=iso=>iso.split("-").reverse().join("/");
+const norm=s=>String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const digits=s=>String(s).replace(/\D/g,"");
+function numWa(n){let d=digits(n);if(d&&d.length<=11)d="55"+d;return d}
+function waLink(text,num){return "https://wa.me/"+(num?numWa(num):"")+"?text="+encodeURIComponent(text)}
+const aviso=(tipo,txt)=>'<div class="aviso '+tipo+'">'+ic(tipo==="info"?"info":tipo,20)+'<div>'+txt+'</div></div>';
+
+/* ---------- Planilha Google (opcional) ---------- */
+function parseCSV(t){const rows=[];let row=[],cur="",q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){cur+='"';i++}else q=false}else cur+=c}else if(c==='"')q=true;else if(c===','){row.push(cur);cur=""}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(cur);rows.push(row);row=[];cur=""}else cur+=c}if(cur!==""||row.length){row.push(cur);rows.push(row)}return rows}
+function isoData(s){s=String(s||"").trim();if(s.indexOf("/")>0){const p=s.split("/");if(p.length===3)return p[2].trim()+"-"+pad(p[1].trim())+"-"+pad(p[0].trim())}return s}
+function hora(s){s=String(s||"").trim();const m=s.match(/^(\d{1,2})[:h](\d{2})?/);return m?pad(m[1])+":"+(m[2]||"00"):s}
+async function carregarPlanilha(){
+  if(!CONFIG.planilhaReservasCSV)return;
+  try{
+    const r=await fetch(CONFIG.planilhaReservasCSV,{cache:"no-store"});
+    if(!r.ok)throw 0;
+    const rows=parseCSV(await r.text());
+    const h=rows[0].map(x=>norm(x).trim());
+    const ix=n=>h.indexOf(n);
+    reservas=rows.slice(1).filter(r=>r[ix("data")]).map(r=>({
+      data:isoData(r[ix("data")]),inicio:hora(r[ix("inicio")]),fim:hora(r[ix("fim")]),
+      espaco:(r[ix("espaco")]||"Outro").trim(),quem:(r[ix("quem")]||"").trim(),obs:(r[ix("obs")]||"").trim()
+    }));
+    statusAgenda="Agenda sincronizada com a planilha do condomínio.";
+  }catch(e){statusAgenda="Não consegui atualizar a agenda agora. Mostrando a última lista salva na página."}
+  if(location.hash.indexOf("agenda")>0)render();
+}
+
+/* ---------- Navegação ---------- */
+const TITULOS={"":"Início",agenda:"Agenda e reservas",contatos:"Horários e contatos",regras:"Regras de convivência",buscar:"Buscar uma dúvida",agora:"Posso agora?",docs:"Documentos e administração"};
+function render(){
+  const r=(location.hash||"#/").replace(/^#\/?/,"");
+  const view={"":vHome,agenda:vAgenda,contatos:vContatos,regras:vRegras,buscar:vBuscar,agora:vAgora,docs:vDocs}[r]||vHome;
+  const home=r===""||!TITULOS.hasOwnProperty(r);
+  $("app").innerHTML=
+   '<header class="top">'+(home?'':'<a class="voltar" href="#/" aria-label="Voltar ao início">'+ic("voltar",22)+'</a>')+
+   '<h1>'+(home?'<span class="sub">Portal do morador</span>'+esc(CONFIG.nome):esc(TITULOS[r]))+'</h1></header><main>'+view()+
+   '<div class="rodape">Informações da Cartilha de Boa Convivência · Atualizado em '+esc(CONFIG.atualizadoEm)+'</div></main>';
+  window.scrollTo(0,0);
+  if(r==="buscar")buscar();
+}
+window.addEventListener("hashchange",render);
+
+/* ---------- Início ---------- */
+function tile(rota,icone,t,s){return '<a class="tile" href="#/'+rota+'">'+chipic(icone)+'<div><div class="t">'+t+'</div><div class="s">'+s+'</div></div></a>'}
+function vHome(){
+  return '<div class="hero"><h2>Como podemos ajudar?</h2><p>Toque no assunto que você procura.</p></div>'+
+  '<div class="grid">'+
+  tile("agenda","agenda","Agenda e reservas","Salão e quiosques")+
+  tile("contatos","contatos","Horários e contatos","Ligar com um toque")+
+  tile("regras","regras","Regras","Organizadas por assunto")+
+  tile("buscar","buscar","Buscar dúvida","Digite uma palavra")+
+  tile("agora","agora","Posso agora?","Barulho, lixo, piscina")+
+  tile("docs","docs","Documentos e síndico","Cartilha e contato")+
+  '</div>';
+}
+
+/* ---------- Agenda e reservas ---------- */
+function mudarMes(d){st.mes+=d;if(st.mes<0){st.mes=11;st.ano--}if(st.mes>11){st.mes=0;st.ano++}st.dia=null;render()}
+function setMesAno(){st.mes=+$("selMes").value;st.ano=+$("selAno").value;st.dia=null;render()}
+function setFiltro(f){st.filtro=f;render()}
+function setDia(k){st.dia=(st.dia===k)?null:k;render()}
+function vAgenda(){
+  const anos=[];for(let a=hoje.getFullYear()-1;a<=hoje.getFullYear()+3;a++)anos.push(a);
+  const first=new Date(st.ano,st.mes,1).getDay(),n=new Date(st.ano,st.mes+1,0).getDate();
+  const filt=reservas.filter(r=>st.filtro==="Todos"||r.espaco===st.filtro);
+  const map={};filt.forEach(r=>{(map[r.data]=map[r.data]||[]).push(r)});
+  let cells=["D","S","T","Q","Q","S","S"].map(x=>'<div class="h">'+x+'</div>').join("");
+  for(let i=0;i<first;i++)cells+="<div></div>";
+  for(let d=1;d<=n;d++){
+    const k=key(st.ano,st.mes,d);
+    const cls=["d",k===key(hoje.getFullYear(),hoje.getMonth(),hoje.getDate())?"hoje":"",map[k]?"res":"",st.dia===k?"sel":""].join(" ");
+    cells+='<button class="'+cls+'" onclick="setDia(\''+k+'\')">'+d+(map[k]?"<i></i>":"")+'</button>';
+  }
+  const prefixo=st.ano+"-"+pad(st.mes+1);
+  const lista=filt.filter(r=>st.dia?r.data===st.dia:r.data.indexOf(prefixo)===0).sort((a,b)=>(a.data+a.inicio).localeCompare(b.data+b.inicio));
+  const titLista=st.dia?"Reservas em "+br(st.dia):"Reservas de "+MESES[st.mes]+" de "+st.ano;
+  const itens=lista.length?lista.map(r=>'<div class="res-item"><b>'+esc(r.espaco)+'</b>'+br(r.data)+' · '+esc(r.inicio)+' às '+esc(r.fim)+(r.quem?'<br><span class="muted">'+esc(r.quem)+'</span>':'')+(r.obs?'<br><span class="muted">'+esc(r.obs)+'</span>':'')+'</div>').join(""):
+    aviso("ok",st.dia?"Nenhuma reserva neste dia.":"Nenhuma reserva neste mês.");
+  const chips=["Todos"].concat(ESPACOS).map(f=>'<button class="chip '+(st.filtro===f?"on":"")+'" onclick="setFiltro(\''+f+'\')">'+f+'</button>').join("");
+  return aviso("info","As reservas são feitas <b>somente pelo grupo de WhatsApp</b>. Sem limite por morador e sem taxa. Piscina, parquinho e academia <b>não</b> têm reserva.").replace('class="aviso info"','class="aviso info" style="margin:0 0 14px"')+
+  '<div class="chips">'+chips+'</div>'+
+  '<div class="nav"><button onclick="mudarMes(-1)" aria-label="Mês anterior">'+ic("prev",22)+'</button>'+
+  '<select id="selMes" onchange="setMesAno()">'+MESES.map((m,i)=>'<option value="'+i+'"'+(i===st.mes?" selected":"")+'>'+m+'</option>').join("")+'</select>'+
+  '<select id="selAno" onchange="setMesAno()">'+anos.map(a=>'<option'+(a===st.ano?" selected":"")+'>'+a+'</option>').join("")+'</select>'+
+  '<button onclick="mudarMes(1)" aria-label="Próximo mês">'+ic("prox",22)+'</button></div>'+
+  '<div class="cal">'+cells+'</div>'+
+  '<h3 class="sec">'+titLista+'</h3>'+itens+
+  (statusAgenda?'<p class="muted">'+esc(statusAgenda)+'</p>':'')+
+  '<div class="card" style="margin-top:18px"><div class="cardhead">'+chipic("agenda",true)+'<h3>Quero reservar</h3></div><p class="muted" style="margin:0">Preencha e toque em enviar: o WhatsApp abre com a mensagem pronta. Depois é só mandar no grupo de reservas.</p>'+
+  '<label>O que você quer reservar?</label><select id="rs_esp" onchange="checaReserva()">'+ESPACOS.map(e=>'<option>'+e+'</option>').join("")+'</select>'+
+  '<label>Dia</label><input type="date" id="rs_data" onchange="checaReserva()">'+
+  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><label>Início</label><input type="time" id="rs_ini" onchange="checaReserva()"></div><div><label>Término</label><input type="time" id="rs_fim" onchange="checaReserva()"></div></div>'+
+  '<label>Seu nome ou número da casa</label><input id="rs_quem" placeholder="Ex.: Maria – Casa 12" oninput="checaReserva()">'+
+  '<label>Observação (opcional)</label><input id="rs_obs" placeholder="Ex.: aniversário, cerca de 30 pessoas">'+
+  '<div id="rs_aviso"></div>'+
+  '<div class="row"><button class="btn zap" onclick="enviarReserva()">'+ic("enviar",18)+'Enviar no WhatsApp</button><button class="btn sec" onclick="copiarReserva()">'+ic("copiar",18)+'Copiar mensagem</button></div></div>';
+}
+function dadosReserva(){return{esp:$("rs_esp").value,data:$("rs_data").value,ini:$("rs_ini").value,fim:$("rs_fim").value,quem:$("rs_quem").value.trim(),obs:$("rs_obs").value.trim()}}
+function checaReserva(){
+  const d=dadosReserva();let h="";
+  if(d.data&&d.ini&&d.fim){
+    if(d.fim<=d.ini)h=aviso("no","O horário de término precisa ser depois do início.");
+    else if(d.esp!=="Outro"){
+      const c=reservas.filter(r=>r.espaco===d.esp&&r.data===d.data&&d.ini<r.fim&&r.inicio<d.fim);
+      h=c.length?aviso("av","Já existe reserva neste espaço, neste dia, entre "+esc(c[0].inicio)+" e "+esc(c[0].fim)+". Escolha outro horário."):aviso("ok","Horário livre na agenda.");
+    }
+  }
+  $("rs_aviso").innerHTML=h;
+}
+function textoReserva(){
+  const d=dadosReserva();
+  if(!d.data||!d.ini||!d.fim||!d.quem){alert("Preencha o dia, o início, o término e seu nome ou casa.");return null}
+  if(d.fim<=d.ini){alert("O horário de término precisa ser depois do início.");return null}
+  return "Olá! Gostaria de reservar: "+d.esp+"\nDia: "+br(d.data)+"\nHorário: das "+d.ini+" às "+d.fim+"\nMorador: "+d.quem+(d.obs?"\nObservação: "+d.obs:"");
+}
+function enviarReserva(){const t=textoReserva();if(t)window.open(waLink(t,""),"_blank")}
+function copiarReserva(){const t=textoReserva();if(!t)return;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>alert("Mensagem copiada! Cole no grupo de reservas.")).catch(()=>prompt("Copie a mensagem:",t))}
+
+/* ---------- Horários e contatos ---------- */
+function vContatos(){
+  const cont=CONTATOS.map(c=>'<div class="card"><div class="cardhead">'+chipic("user",true)+'<div><h3>'+esc(c.nome)+'</h3><div class="muted">'+esc(c.funcao)+' · '+esc(c.tel)+'</div></div></div>'+(c.obs?'<div class="muted">'+esc(c.obs)+'</div>':'')+
+   '<div class="row"><a class="btn" href="tel:+'+numWa(c.tel)+'">'+ic("contatos",18)+'Ligar</a><a class="btn zap" target="_blank" href="'+waLink("Olá, "+c.nome+"!",c.tel)+'">'+ic("chat",18)+'WhatsApp</a></div></div>').join("");
+  const hor=HORARIOS.map(h=>'<div class="hrow">'+chipic(h[0],true)+'<div><b>'+esc(h[1])+'</b><span>'+esc(h[2])+'</span></div></div>').join("");
+  return '<h3 class="sec" style="margin-top:0">Contatos úteis</h3>'+cont+'<h3 class="sec">Horários importantes</h3><div class="card" style="padding-top:4px;padding-bottom:4px">'+hor+'</div>';
+}
+
+/* ---------- Regras ---------- */
+function itemRegra(i){return '<div class="regra"><b>'+esc(i.t)+'</b>'+esc(i.x)+'<br><span class="fonte">'+ic("docs",14)+esc(i.f)+'</span></div>'}
+function vRegras(){
+  return REGRAS.map(g=>'<details class="tema"><summary>'+chipic(g.icone,true)+esc(g.tema)+'</summary><div class="corpo">'+g.itens.map(itemRegra).join("")+'</div></details>').join("");
+}
+
+/* ---------- Buscar ---------- */
+function vBuscar(){
+  return '<input id="q" type="search" placeholder="Digite: cachorro, reforma, domingo…" oninput="buscar()" autocomplete="off">'+
+  '<div class="chips" style="margin-top:12px;flex-wrap:wrap;overflow:visible">'+SUGESTOES.map(s=>'<button class="chip" onclick="$(\'q\').value=\''+s+'\';buscar()">'+s+'</button>').join("")+'</div><div id="res"></div>';
+}
+function buscar(){
+  const q=norm($("q").value).trim();const out=$("res");
+  if(!q){out.innerHTML='<p class="muted">Digite uma palavra ou toque em uma sugestão.</p>';return}
+  const toks=q.split(/\s+/).filter(t=>t.length>1);
+  const achados=[];
+  REGRAS.forEach(g=>g.itens.forEach(i=>{
+    const alvo=norm(i.t+" "+i.p+" "+g.tema),corpo=norm(i.x);let s=0;
+    toks.forEach(t=>{if(alvo.indexOf(t)>=0)s+=3;else if(corpo.indexOf(t)>=0)s+=1});
+    if(s>0)achados.push({s,g,i});
+  }));
+  achados.sort((a,b)=>b.s-a.s);
+  out.innerHTML=achados.length?achados.slice(0,8).map(a=>'<div class="card"><div class="cardhead">'+chipic(a.g.icone,true)+'<span class="muted">'+esc(a.g.tema)+'</span></div>'+itemRegra(a.i).replace('class="regra"','class="regra" style="border-top:0;padding-top:0"')+'</div>').join(""):
+   aviso("av","Não encontrei isso na cartilha.")+'<div class="row"><a class="btn zap" target="_blank" href="'+waLink("Olá! Tenho uma dúvida sobre o condomínio: "+$("q").value,CONFIG.whatsappSindico)+'">'+ic("chat",18)+'Perguntar ao síndico</a></div>';
+}
+
+/* ---------- Posso agora? ---------- */
+function respostas(){
+  const n=new Date(),dia=n.getDay(),h=n.getHours()+n.getMinutes()/60,util=dia>=1&&dia<=5;
+  const R=[];
+  let b;
+  if(h<6||h>=22)b=["no","Não","Horário de silêncio: das 22h às 6h, todos os dias."];
+  else if(dia===0)b=["no","Não","Aos domingos são proibidos maquinário e ruídos intensos, e sons altos em residências não são autorizados."];
+  else if(dia===6&&h>=12)b=["no","Não","Aos sábados à tarde são proibidos maquinário e ruídos intensos, e sons altos em residências não são autorizados."];
+  else if(h>=8&&h<18&&util)b=["ok","Sim, com bom senso","Obras e barulhos moderados são permitidos nos dias úteis, das 8h às 18h."];
+  else if(dia===6)b=["av","Com cuidado","A cartilha restringe ruídos intensos só aos sábados à tarde. Pela manhã, mantenha o bom senso."];
+  else b=["av","Evite","Fora do horário de 8h às 18h, evite obras e barulhos e mantenha o volume baixo, respeitando os vizinhos."];
+  R.push(["obra","Posso fazer obra ou barulho agora?"].concat(b));
+  let l;
+  if(dia===0)l=["no","Não","Aos domingos é proibido descartar lixo comum. Aguarde a segunda-feira, até as 14h."];
+  else if(dia===6)l=h<8?["ok","Sim","Aos sábados o lixo pode ser colocado até as 8h, em sacos bem fechados."]:["no","Não","Aos sábados o lixo só pode ser colocado até as 8h. Aguarde a segunda-feira, até as 14h."];
+  else l=h<14?["ok","Sim","Nos dias úteis o lixo pode ser colocado até as 14h, em sacos bem fechados."]:["no","Não","Hoje o horário já passou (até 14h). Coloque amanhã de manhã, em sacos bem fechados."];
+  R.push(["lixo","Posso colocar o lixo agora?"].concat(l));
+  let p;
+  if(h<6||h>=22)p=["no","Não","Horário de silêncio, das 22h às 6h."];
+  else if(dia===6)p=h<10?["av","Ainda não","Aos sábados a piscina é liberada a partir das 10h, depois da limpeza."]:["ok","Provavelmente sim","Aos sábados está liberada a partir das 10h. Confira o quadro de avisos da piscina."];
+  else if(dia===1)p=["av","Confira","Segunda-feira é dia de limpeza da piscina. Veja o quadro de avisos da piscina."];
+  else p=["av","Confira o quadro","Os horários de funcionamento estão no quadro de avisos da piscina."];
+  p[2]+=" Lembre: ducha antes, nada de vidro e crianças menores de 12 anos sempre com adulto.";
+  R.push(["piscina","Posso usar a piscina agora?"].concat(p));
+  let m;
+  if(h<6||h>=22)m=["no","Não","Horário de silêncio, das 22h às 6h."];
+  else if(dia>=1&&dia<=6&&h<12)m=["ok","Sim","Segunda a sábado, pela manhã, é o horário preferencial para mudanças."];
+  else m=["av","Só sem ruído","O horário preferencial é de segunda a sábado, pela manhã. Em outros horários só se a mudança não causar barulho."];
+  R.push(["mudanca","Posso fazer mudança agora?"].concat(m));
+  const lim=(dia===1||dia===3||dia===5)&&h>=17&&h<19;
+  R.push(["limpeza","A equipe de limpeza está no condomínio?",lim?"ok":"av",lim?"Sim":"Agora não",lim?"A limpeza trabalha hoje até as 19h.":"A equipe trabalha às segundas, quartas e sextas, das 17h às 19h."]);
+  return R;
+}
+function vAgora(){
+  const n=new Date();
+  return '<div class="agora">'+ic("agora",26)+'<div><small>Agora</small><b>'+DIAS[n.getDay()]+', '+pad(n.getHours())+':'+pad(n.getMinutes())+'</b></div></div>'+
+  respostas().map(r=>'<div class="card"><div class="cardhead">'+chipic(r[0],true)+'<h3>'+r[1]+'</h3></div><span class="badge '+r[2]+'">'+ic(r[2],15)+r[3]+'</span><div>'+esc(r[4])+'</div></div>').join("")+
+  '<p class="muted">As respostas usam o dia e a hora do seu celular e seguem a Cartilha de Boa Convivência.</p>';
+}
+
+/* ---------- Documentos e administração ---------- */
+function vDocs(){
+  const doc=(titulo,desc,link)=>'<div class="card"><div class="cardhead">'+chipic("docs",true)+'<h3>'+titulo+'</h3></div><div class="muted">'+desc+'</div><div class="row">'+(link?'<a class="btn" target="_blank" href="'+esc(link)+'">Abrir documento</a>':'<span class="muted">Em breve neste portal. Peça ao síndico.</span>')+'</div></div>';
+  return doc("Cartilha de Boa Convivência","Normas e regulamento interno do condomínio (3 páginas).",CONFIG.linkCartilha)+
+  doc("Regulamento Interno","Documento completo do condomínio.",CONFIG.linkRegulamento)+
+  '<div class="card"><div class="cardhead">'+chipic("user",true)+'<h3>Falar com o síndico</h3></div><div class="muted">Para dúvidas que não estão aqui ou para entrar no grupo de reservas. Outros assuntos continuam no grupo do condomínio.</div><div class="row">'+
+  '<a class="btn zap" target="_blank" href="'+waLink("Olá, síndico! Tenho uma dúvida sobre o condomínio.",CONFIG.whatsappSindico)+'">'+ic("chat",18)+'Chamar o síndico</a>'+
+  '<a class="btn sec" target="_blank" href="'+waLink("Olá, síndico! Gostaria de ser adicionado(a) ao grupo de reservas.",CONFIG.whatsappSindico)+'">Entrar no grupo de reservas</a></div></div>';
+}
+
+render();
+carregarPlanilha();
+</script>
+</body>
+</html>
