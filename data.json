@@ -1,0 +1,295 @@
+{
+  "config": {
+    "nome": "Condomínio Lícia M. Santiago",
+    "atualizadoEm": "novembro de 2026",
+    "whatsappSindico": "",
+    "nomeGrupoReservas": "Reservas - Quiosque",
+    "linkGrupoReservas": ""
+  },
+  "reservas": [],
+  "contatos": [
+    {
+      "nome": "Raimundo",
+      "funcao": "Piscineiro",
+      "tel": "(71) 99628-5764",
+      "obs": "Limpeza da piscina às segundas-feiras e aos sábados."
+    },
+    {
+      "nome": "Cabeça",
+      "funcao": "Serviço de limpeza",
+      "tel": "(71) 99694-5471",
+      "obs": "Trabalha às segundas, quartas e sextas, das 17h às 19h."
+    },
+    {
+      "nome": "Toninho",
+      "funcao": "Eletricista",
+      "tel": "(71) 99634-5747",
+      "obs": ""
+    }
+  ],
+  "horarios": [
+    [
+      "lixo",
+      "Lixo comum",
+      "Dias úteis até 14h · Sábados até 8h · Domingo: não"
+    ],
+    [
+      "reciclar",
+      "Coleta seletiva",
+      "Dias úteis, nos horários regulares de coleta"
+    ],
+    [
+      "som",
+      "Silêncio",
+      "Todos os dias, das 22h às 6h"
+    ],
+    [
+      "obra",
+      "Obras e barulhos moderados",
+      "Dias úteis, das 8h às 18h"
+    ],
+    [
+      "piscina",
+      "Piscina",
+      "Liberada aos sábados a partir das 10h (limpeza às segundas e sábados). Demais horários: quadro de avisos da piscina"
+    ],
+    [
+      "limpeza",
+      "Limpeza do condomínio",
+      "Segunda, quarta e sexta, das 17h às 19h"
+    ],
+    [
+      "mudanca",
+      "Mudanças",
+      "De preferência de segunda a sábado, pela manhã"
+    ],
+    [
+      "taxa",
+      "Taxa de condomínio",
+      "Casas: R$ 200,00 · Casas em construção e terrenos: R$ 170,00 · Vence todo dia 05"
+    ]
+  ],
+  "regras": [
+    {
+      "tema": "Segurança e portões",
+      "icone": "seg",
+      "itens": [
+        {
+          "t": "Portões",
+          "x": "Mantenha os portões sempre fechados e travados ao entrar ou sair. Não bloqueie as passagens.",
+          "f": "Cartilha, p. 1, item 1",
+          "p": "portao portoes fechar trancar travar entrada saida cadeado"
+        },
+        {
+          "t": "Visitas e entregadores",
+          "x": "Nunca abra para pessoas desconhecidas sem confirmação ou identificação. Entregadores e prestadores de serviço devem ser atendidos pelo próprio morador responsável.",
+          "f": "Cartilha, p. 1, item 1",
+          "p": "visita visitante estranho desconhecido entregador entrega delivery motoboy ifood pedido prestador"
+        },
+        {
+          "t": "Obras e reformas: cadastro de prestadores",
+          "x": "Quem tem imóvel em reforma ou construção deve cadastrar antes os prestadores de serviço na administração, orientá-los sobre as regras internas e se responsabilizar pela circulação deles nas áreas comuns.",
+          "f": "Cartilha, p. 1, item 1",
+          "p": "obra obras reforma construcao pedreiro operario prestador cadastro cadastrar"
+        }
+      ]
+    },
+    {
+      "tema": "Áreas comuns e reservas",
+      "icone": "festa",
+      "itens": [
+        {
+          "t": "Como reservar salão de festas e quiosques",
+          "x": "A reserva é feita somente pelo grupo de WhatsApp de reservas. Não há limite de reservas por morador e não há cobrança de taxa. Quem não está no grupo deve chamar o síndico no privado para ser adicionado.",
+          "f": "Cartilha, p. 1, item 2",
+          "p": "reserva reservar festa salao quiosque churrasco aniversario evento grupo taxa valor pagar cobranca"
+        },
+        {
+          "t": "Piscina, parquinho e academia",
+          "x": "O uso é coletivo. Não é permitido fazer reservas dessas áreas.",
+          "f": "Cartilha, p. 1, item 2",
+          "p": "piscina parquinho playground academia reserva reservar"
+        },
+        {
+          "t": "Economia de energia",
+          "x": "Ao terminar de usar o salão ou o quiosque, apague as luzes e desligue freezers, caixas de som, bombas e ventiladores.",
+          "f": "Cartilha, p. 1, item 2",
+          "p": "luz lampada energia desligar freezer som caixa ventilador bomba"
+        },
+        {
+          "t": "Cuidado com o patrimônio e objetos pessoais",
+          "x": "Zele pelos bens, móveis e áreas verdes: danos causados de propósito ou por imprudência são de responsabilidade do morador envolvido. Não deixe brinquedos, bicicletas, ferramentas ou outros objetos nas áreas de passagem ou convivência.",
+          "f": "Cartilha, p. 1, item 2",
+          "p": "dano estragar quebrar patrimonio brinquedo bicicleta bike ferramenta objeto jogado passagem"
+        }
+      ]
+    },
+    {
+      "tema": "Lixo e coleta seletiva",
+      "icone": "lixo",
+      "itens": [
+        {
+          "t": "Lixo comum e orgânico",
+          "x": "Pode ser colocado nos dias úteis até as 14h e aos sábados até as 8h, em sacos bem fechados. É proibido descartar à tarde, à noite e aos domingos.",
+          "f": "Cartilha, p. 2, item 3",
+          "p": "lixo organico comum saco horario domingo sabado colocar jogar descartar lixeira"
+        },
+        {
+          "t": "Coleta seletiva (recicláveis)",
+          "x": "Somente materiais secos e limpos: plástico, papelão, garrafas PET e latas de alumínio. Não misture restos de comida ou resíduos orgânicos. Coleta em dias úteis, nos horários regulares.",
+          "f": "Cartilha, p. 2, item 3",
+          "p": "reciclavel reciclagem seletiva plastico papelao pet lata aluminio garrafa"
+        },
+        {
+          "t": "Entulho e móveis usados",
+          "x": "É proibido descartar nas lixeiras comunitárias. Devem ser retirados por caçamba particular contratada pelo responsável.",
+          "f": "Cartilha, p. 2, item 3",
+          "p": "entulho movel moveis sofa colchao cacamba obra resto construcao geladeira"
+        }
+      ]
+    },
+    {
+      "tema": "Animais de estimação",
+      "icone": "pet",
+      "itens": [
+        {
+          "t": "Coleira",
+          "x": "Os animais devem circular sempre com guia/coleira e acompanhados por um responsável capaz de contê-los.",
+          "f": "Cartilha, p. 2, item 4",
+          "p": "pet animal cachorro cao gato coleira guia passear passeio"
+        },
+        {
+          "t": "Fezes e urina",
+          "x": "Recolher as fezes é dever imediato do tutor: tenha sempre sacos plásticos. Evite que o animal urine em pilares, calçadas de grande circulação, portas, portões e móveis comuns. Se acontecer, lave com água e desinfetante.",
+          "f": "Cartilha, p. 2, item 4",
+          "p": "coco fezes xixi urina pet cachorro limpar saco recolher"
+        },
+        {
+          "t": "Latidos e comportamento",
+          "x": "Cuide do bem-estar do pet para evitar latidos excessivos ou agressividade, garantindo a tranquilidade de todos.",
+          "f": "Cartilha, p. 2, item 4",
+          "p": "latido latir barulho cachorro agressivo agressividade pet"
+        }
+      ]
+    },
+    {
+      "tema": "Barulho e obras",
+      "icone": "som",
+      "itens": [
+        {
+          "t": "Dias úteis (horário comercial)",
+          "x": "Obras e barulhos moderados são permitidos das 8h às 18h, sempre com bom senso.",
+          "f": "Cartilha, p. 2, item 5",
+          "p": "obra obras reforma barulho som furadeira martelo horario dia util segunda sexta"
+        },
+        {
+          "t": "Silêncio da noite",
+          "x": "Silêncio obrigatório todos os dias, das 22h às 6h, respeitando a Lei do Silêncio e o descanso dos vizinhos.",
+          "f": "Cartilha, p. 2, item 5",
+          "p": "silencio noite madrugada barulho 22h lei descanso dormir"
+        },
+        {
+          "t": "Sábado à tarde e domingo",
+          "x": "São proibidas atividades com maquinário ou ruídos intensos. Sons altos em residências não são autorizados. Confraternizações só no salão de festas e dentro de limites toleráveis.",
+          "f": "Cartilha, p. 2, item 5",
+          "p": "sabado domingo tarde barulho som alto maquina maquinario obra reforma festa paredao musica"
+        }
+      ]
+    },
+    {
+      "tema": "Piscina",
+      "icone": "piscina",
+      "itens": [
+        {
+          "t": "Horários",
+          "x": "A piscina é liberada aos sábados a partir das 10h, pois é limpa às segundas e aos sábados. Os demais horários estão no quadro de avisos da piscina.",
+          "f": "Cartilha, p. 3, itens 6 e 9",
+          "p": "piscina horario sabado limpeza funcionamento aberta liberada raimundo"
+        },
+        {
+          "t": "Higiene",
+          "x": "Tome ducha antes de entrar na piscina. Evite óleos bronzeadores e produtos gordurosos antes do mergulho.",
+          "f": "Cartilha, p. 3, item 6",
+          "p": "piscina ducha banho oleo bronzeador protetor higiene"
+        },
+        {
+          "t": "Crianças",
+          "x": "Menores de 12 anos devem estar acompanhados por um adulto responsável o tempo todo.",
+          "f": "Cartilha, p. 3, item 6",
+          "p": "crianca criancas menor filho piscina acompanhado adulto 12 anos"
+        },
+        {
+          "t": "Vidro proibido",
+          "x": "É proibido usar copos, pratos e garrafas de vidro ao redor da piscina. Use plástico ou acrílico.",
+          "f": "Cartilha, p. 3, item 6",
+          "p": "vidro copo prato garrafa taca piscina acrilico plastico"
+        },
+        {
+          "t": "Visitantes",
+          "x": "O acesso de convidados segue o limite definido pela administração e o bom senso, para não sobrecarregar o espaço.",
+          "f": "Cartilha, p. 3, item 6",
+          "p": "visita visitante convidado piscina limite quantidade"
+        }
+      ]
+    },
+    {
+      "tema": "Mudanças",
+      "icone": "mudanca",
+      "itens": [
+        {
+          "t": "Horário de mudança",
+          "x": "De preferência de segunda a sábado, pela manhã. Em outros dias e horários, a mudança pode ser feita se não causar ruído.",
+          "f": "Cartilha, p. 3, item 10",
+          "p": "mudanca mudar caminhao carreto frete horario entrada saida"
+        }
+      ]
+    },
+    {
+      "tema": "Taxa de condomínio",
+      "icone": "taxa",
+      "itens": [
+        {
+          "t": "Valores e vencimento",
+          "x": "Casas: R$ 200,00 por mês. Casas em construção e terrenos: R$ 170,00 por mês. Vencimento até o dia 05 de cada mês.",
+          "f": "Cartilha, p. 3, item 8",
+          "p": "taxa condominio mensalidade valor pagar pagamento boleto vencimento terreno construcao 200 170"
+        }
+      ]
+    },
+    {
+      "tema": "Boa vizinhança",
+      "icone": "vizinho",
+      "itens": [
+        {
+          "t": "Convivência",
+          "x": "Cumprimente vizinhos e funcionários, seja compreensivo com crianças, idosos e pessoas com necessidades especiais, e converse com cordialidade para resolver divergências antes que virem conflito.",
+          "f": "Cartilha, p. 3, item 7",
+          "p": "vizinho vizinhanca convivencia conflito briga reclamacao respeito educacao"
+        }
+      ]
+    }
+  ],
+  "sugestoes": [
+    "cachorro",
+    "reforma",
+    "domingo",
+    "entulho",
+    "festa",
+    "vidro",
+    "mudança",
+    "piscina",
+    "lixo"
+  ],
+  "docs": [
+    {
+      "titulo": "Cartilha de Boa Convivência",
+      "desc": "Normas e regulamento interno do condomínio (3 páginas).",
+      "link": ""
+    },
+    {
+      "titulo": "Regulamento Interno",
+      "desc": "Documento completo do condomínio.",
+      "link": ""
+    }
+  ]
+}
