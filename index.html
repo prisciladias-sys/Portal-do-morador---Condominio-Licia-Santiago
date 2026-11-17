@@ -518,7 +518,7 @@ function ghRepo(){
   return GH_PADRAO;
 }
 const SES_KEY="portalSessaoSindico";
-let tok="";try{tok=sessionStorage.getItem(SES_KEY)||""}catch(e){}
+let tok="";try{tok=localStorage.getItem(SES_KEY)||""}catch(e){}
 let acesso,acessoCarregando=false;
 const adm={sujo:false,ocupado:false,msg:"",reconf:false};
 function ghUrl(p){const g=ghRepo();return "https://api.github.com/repos/"+g.owner+"/"+g.repo+(p||"")}
@@ -565,7 +565,7 @@ async function carregarAcesso(){
   acessoCarregando=false;if(location.hash==="#/admin")render();
 }
 function admMsg(t,tipo){const e=$("adm_msg");if(e)e.innerHTML=t?aviso(tipo,t):""}
-function guardaSessao(){try{sessionStorage.setItem(SES_KEY,tok)}catch(e){}}
+function guardaSessao(){try{localStorage.setItem(SES_KEY,tok)}catch(e){}}
 async function entrarAdmin(){
   const pw=$("adm_pw").value;
   if(!pw){admMsg("Digite a senha.","no");return}
@@ -576,7 +576,7 @@ async function entrarAdmin(){
 async function configurarAdmin(){
   const t=($("adm_tok").value||"").trim(),p1=$("adm_pw").value,p2=$("adm_pw2").value;
   if(!t){admMsg("Cole a chave do GitHub.","no");return}
-  if(p1.length<8){admMsg("Escolha uma senha com pelo menos 8 caracteres.","no");return}
+  if(p1.length<6){admMsg("Escolha uma senha com pelo menos 6 caracteres.","no");return}
   if(p1!==p2){admMsg("As duas senhas não são iguais.","no");return}
   admMsg("Conferindo a chave…","info");
   const antiga=tok;tok=t;
@@ -592,7 +592,7 @@ async function configurarAdmin(){
 }
 async function trocarSenha(){
   const p1=$("adm_np1").value,p2=$("adm_np2").value,e=$("adm_npmsg");
-  if(p1.length<8){e.innerHTML=aviso("no","Use pelo menos 8 caracteres.");return}
+  if(p1.length<6){e.innerHTML=aviso("no","Use pelo menos 6 caracteres.");return}
   if(p1!==p2){e.innerHTML=aviso("no","As duas senhas não são iguais.");return}
   try{const blob=await cifrar(tok,p1);await ghPut("acesso.json",b64txt(JSON.stringify(blob)),"Nova senha do síndico");acesso=blob;e.innerHTML=aviso("ok","Senha trocada. Vale a partir de agora em todos os aparelhos.")}
   catch(x){e.innerHTML=aviso("no",erroGh(x))}
@@ -600,7 +600,7 @@ async function trocarSenha(){
 function reconfigurar(){acesso=null;adm.reconf=true;render()}
 function sairAdmin(){
   if(adm.sujo&&!confirm("Há alterações não salvas. Sair mesmo assim?"))return;
-  adm.sujo=false;tok="";try{sessionStorage.removeItem(SES_KEY)}catch(e){}
+  adm.sujo=false;tok="";try{localStorage.removeItem(SES_KEY)}catch(e){}
   location.hash="#/";location.reload();
 }
 window.addEventListener("beforeunload",e=>{if(adm.sujo){e.preventDefault();e.returnValue=""}});
@@ -732,7 +732,7 @@ function vAdminLogin(){
   return '<div class="card"><div class="cardhead">'+chipic("user",true)+'<h3>Primeira configuração</h3></div>'+
   '<p class="muted" style="margin:0">Isto é feito <b>uma vez só</b>. Você cola a chave do GitHub e escolhe uma senha. Depois disso, qualquer pessoa que souber a senha entra e edita, em qualquer celular.</p>'+
   '<label>Chave do GitHub</label><input id="adm_tok" type="password" autocomplete="off" placeholder="github_pat_...">'+
-  '<label>Escolha a senha (mínimo 8 caracteres)</label><input id="adm_pw" type="password" autocomplete="new-password">'+
+  '<label>Escolha a senha (mínimo 6 caracteres)</label><input id="adm_pw" type="password" autocomplete="new-password">'+
   '<label>Repita a senha</label><input id="adm_pw2" type="password" autocomplete="new-password" onkeydown="if(event.key===\'Enter\')configurarAdmin()">'+
   '<div id="adm_msg"></div><div class="row"><button class="btn" onclick="configurarAdmin()">Salvar senha e entrar</button></div></div>'+
   '<div class="card"><h3>Como criar a chave do GitHub</h3><ol class="passos">'+
@@ -747,7 +747,7 @@ function vAdmin(){
   if(!tok)return vAdminLogin();
   return aviso("info","Altere os campos e toque em <b>Salvar alterações</b>. As mudanças aparecem para todos os moradores em cerca de 1 a 2 minutos.").replace('class="aviso info"','class="aviso info" style="margin:0 0 14px"')+
    secGeral()+secContatos()+secHorarios()+secRegras()+secDocs()+secReservas()+
-   secao("Trocar a senha","user",'<label>Nova senha (mínimo 8 caracteres)</label><input id="adm_np1" type="password" autocomplete="new-password"><label>Repita a nova senha</label><input id="adm_np2" type="password" autocomplete="new-password"><div id="adm_npmsg"></div><div class="row"><button class="btn sec" onclick="trocarSenha()">Trocar senha</button></div>')+
+   secao("Trocar a senha","user",'<label>Nova senha (mínimo 6 caracteres)</label><input id="adm_np1" type="password" autocomplete="new-password"><label>Repita a nova senha</label><input id="adm_np2" type="password" autocomplete="new-password"><div id="adm_npmsg"></div><div class="row"><button class="btn sec" onclick="trocarSenha()">Trocar senha</button></div>')+
    '<div class="row"><button class="btn sec" onclick="sairAdmin()">Sair da área do síndico</button></div>'+
    '<div class="admbar"><div class="st" id="adm_st">'+esc(adm.msg||"Altere o que precisar e salve.")+'</div><button class="btn" onclick="salvarTudo()">'+ic("ok",18)+'Salvar alterações</button></div>';
 }
