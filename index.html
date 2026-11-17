@@ -517,9 +517,10 @@ function ghRepo(){
   if(/\.github\.io$/i.test(h)){const o=h.replace(/\.github\.io$/i,""),r=location.pathname.split("/")[1];if(o&&r)return{owner:o,repo:r}}
   return GH_PADRAO;
 }
-const TOK_KEY="portalChaveSindico";
-let tok="";try{tok=localStorage.getItem(TOK_KEY)||""}catch(e){}
-const adm={sujo:false,ocupado:false,msg:""};
+const SES_KEY="portalSessaoSindico";
+let tok="";try{tok=sessionStorage.getItem(SES_KEY)||""}catch(e){}
+let acesso,acessoCarregando=false;
+const adm={sujo:false,ocupado:false,msg:"",reconf:false};
 function ghUrl(p){const g=ghRepo();return "https://api.github.com/repos/"+g.owner+"/"+g.repo+(p||"")}
 function ghH(extra){return Object.assign({"Authorization":"Bearer "+tok,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},extra||{})}
 function erroGh(e){
@@ -540,25 +541,66 @@ async function ghPut(path,b64,msg){
   if(!r.ok){let t="";try{t=(await r.json()).message}catch(e){}throw new Error(r.status+" "+t)}
 }
 
-/* ----- entrar / sair ----- */
+/* ----- senha fixa: a chave do GitHub fica guardada CRIPTOGRAFADA (acesso.json) e só abre com a senha ----- */
+const b64u=a=>{let s="";a.forEach(x=>s+=String.fromCharCode(x));return btoa(s)};
+const u8=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0));
+async function chaveDaSenha(pw,salt){
+  const km=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:300000,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
+}
+async function cifrar(token,pw){
+  const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));
+  const k=await chaveDaSenha(pw,salt);
+  const ct=await crypto.subtle.encrypt({name:"AES-GCM",iv:iv},k,new TextEncoder().encode(token));
+  return {v:1,salt:b64u(salt),iv:b64u(iv),data:b64u(new Uint8Array(ct))};
+}
+async function decifrar(pw){
+  const k=await chaveDaSenha(pw,u8(acesso.salt));
+  const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:u8(acesso.iv)},k,u8(acesso.data));
+  return new TextDecoder().decode(pt);
+}
+async function carregarAcesso(){
+  if(acessoCarregando)return;acessoCarregando=true;
+  try{const r=await fetch("acesso.json?v="+Date.now(),{cache:"no-store"});acesso=r.ok?await r.json():null}catch(e){acesso=null}
+  acessoCarregando=false;if(location.hash==="#/admin")render();
+}
 function admMsg(t,tipo){const e=$("adm_msg");if(e)e.innerHTML=t?aviso(tipo,t):""}
+function guardaSessao(){try{sessionStorage.setItem(SES_KEY,tok)}catch(e){}}
 async function entrarAdmin(){
-  const v=($("adm_tok").value||"").trim();
-  if(!v){admMsg("Cole a chave que você copiou do GitHub.","no");return}
+  const pw=$("adm_pw").value;
+  if(!pw){admMsg("Digite a senha.","no");return}
+  admMsg("Conferindo…","info");
+  try{tok=await decifrar(pw);guardaSessao();render()}
+  catch(e){tok="";admMsg("Senha incorreta.","no")}
+}
+async function configurarAdmin(){
+  const t=($("adm_tok").value||"").trim(),p1=$("adm_pw").value,p2=$("adm_pw2").value;
+  if(!t){admMsg("Cole a chave do GitHub.","no");return}
+  if(p1.length<8){admMsg("Escolha uma senha com pelo menos 8 caracteres.","no");return}
+  if(p1!==p2){admMsg("As duas senhas não são iguais.","no");return}
   admMsg("Conferindo a chave…","info");
-  const antiga=tok;tok=v;
+  const antiga=tok;tok=t;
   try{
     const r=await fetch(ghUrl(""),{headers:ghH(),cache:"no-store"});
     if(!r.ok)throw new Error(r.status);
     const j=await r.json();
     if(j.permissions&&j.permissions.push===false)throw new Error("403");
-    try{localStorage.setItem(TOK_KEY,v)}catch(e){}
-    render();
+    const blob=await cifrar(t,p1);
+    await ghPut("acesso.json",b64txt(JSON.stringify(blob)),"Configurar acesso do síndico");
+    acesso=blob;guardaSessao();render();
   }catch(e){tok=antiga;admMsg(erroGh(e),"no")}
 }
+async function trocarSenha(){
+  const p1=$("adm_np1").value,p2=$("adm_np2").value,e=$("adm_npmsg");
+  if(p1.length<8){e.innerHTML=aviso("no","Use pelo menos 8 caracteres.");return}
+  if(p1!==p2){e.innerHTML=aviso("no","As duas senhas não são iguais.");return}
+  try{const blob=await cifrar(tok,p1);await ghPut("acesso.json",b64txt(JSON.stringify(blob)),"Nova senha do síndico");acesso=blob;e.innerHTML=aviso("ok","Senha trocada. Vale a partir de agora em todos os aparelhos.")}
+  catch(x){e.innerHTML=aviso("no",erroGh(x))}
+}
+function reconfigurar(){acesso=null;adm.reconf=true;render()}
 function sairAdmin(){
   if(adm.sujo&&!confirm("Há alterações não salvas. Sair mesmo assim?"))return;
-  adm.sujo=false;try{localStorage.removeItem(TOK_KEY)}catch(e){}
+  adm.sujo=false;tok="";try{sessionStorage.removeItem(SES_KEY)}catch(e){}
   location.hash="#/";location.reload();
 }
 window.addEventListener("beforeunload",e=>{if(adm.sujo){e.preventDefault();e.returnValue=""}});
@@ -680,24 +722,33 @@ async function admUpload(i,inp){
 
 /* ----- telas do painel ----- */
 function vAdminLogin(){
-  return '<div class="card"><div class="cardhead">'+chipic("user",true)+'<h3>Entrar como síndico</h3></div>'+
-  '<p class="muted" style="margin:0">Para editar o portal você precisa da <b>chave do portal</b>, que funciona como a senha. Só quem tem a chave consegue salvar alterações. Ela fica guardada apenas neste aparelho.</p>'+
-  '<label>Chave do portal</label><input id="adm_tok" type="password" autocomplete="off" placeholder="github_pat_..." onkeydown="if(event.key===\'Enter\')entrarAdmin()">'+
-  '<div id="adm_msg"></div><div class="row"><button class="btn" onclick="entrarAdmin()">Entrar</button></div></div>'+
-  '<div class="card"><h3>Como criar a chave (só uma vez)</h3><ol class="passos">'+
+  if(acesso===undefined){carregarAcesso();return '<div class="hero"><p>Carregando…</p></div>'}
+  if(acesso&&acesso.data){
+    return '<div class="card"><div class="cardhead">'+chipic("user",true)+'<h3>Área do síndico</h3></div>'+
+    '<label>Senha</label><input id="adm_pw" type="password" autocomplete="current-password" onkeydown="if(event.key===\'Enter\')entrarAdmin()">'+
+    '<div id="adm_msg"></div><div class="row"><button class="btn" onclick="entrarAdmin()">Entrar e editar</button></div></div>'+
+    '<div style="text-align:center"><a class="admlink" href="javascript:reconfigurar()">Esqueci a senha / trocar a chave do GitHub</a></div>';
+  }
+  return '<div class="card"><div class="cardhead">'+chipic("user",true)+'<h3>Primeira configuração</h3></div>'+
+  '<p class="muted" style="margin:0">Isto é feito <b>uma vez só</b>. Você cola a chave do GitHub e escolhe uma senha. Depois disso, qualquer pessoa que souber a senha entra e edita, em qualquer celular.</p>'+
+  '<label>Chave do GitHub</label><input id="adm_tok" type="password" autocomplete="off" placeholder="github_pat_...">'+
+  '<label>Escolha a senha (mínimo 8 caracteres)</label><input id="adm_pw" type="password" autocomplete="new-password">'+
+  '<label>Repita a senha</label><input id="adm_pw2" type="password" autocomplete="new-password" onkeydown="if(event.key===\'Enter\')configurarAdmin()">'+
+  '<div id="adm_msg"></div><div class="row"><button class="btn" onclick="configurarAdmin()">Salvar senha e entrar</button></div></div>'+
+  '<div class="card"><h3>Como criar a chave do GitHub</h3><ol class="passos">'+
   '<li>Entre no <b>GitHub</b> com a conta dona do portal.</li>'+
   '<li>Toque na sua foto → <b>Settings</b> → no fim do menu, <b>Developer settings</b> → <b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b>.</li>'+
-  '<li>Dê um nome (ex.: Portal síndico) e escolha a validade (ex.: 1 ano).</li>'+
+  '<li>Dê um nome (ex.: Portal síndico) e escolha a validade mais longa possível.</li>'+
   '<li>Em <b>Repository access</b>, marque <b>Only select repositories</b> e escolha só o repositório do portal.</li>'+
   '<li>Em <b>Permissions → Repository permissions</b>, ache <b>Contents</b> e escolha <b>Read and write</b>.</li>'+
-  '<li>Toque em <b>Generate token</b>, copie o código que começa com <b>github_pat_</b> e cole acima.</li></ol>'+
-  '<p class="muted" style="margin:10px 0 0">Para tirar o acesso de alguém, basta apagar a chave dessa pessoa no GitHub.</p></div>';
+  '<li>Toque em <b>Generate token</b>, copie o código que começa com <b>github_pat_</b> e cole acima.</li></ol></div>';
 }
 function vAdmin(){
   if(!tok)return vAdminLogin();
   return aviso("info","Altere os campos e toque em <b>Salvar alterações</b>. As mudanças aparecem para todos os moradores em cerca de 1 a 2 minutos.").replace('class="aviso info"','class="aviso info" style="margin:0 0 14px"')+
    secGeral()+secContatos()+secHorarios()+secRegras()+secDocs()+secReservas()+
-   '<div class="row"><button class="btn sec" onclick="sairAdmin()">Sair e apagar a chave deste aparelho</button></div>'+
+   secao("Trocar a senha","user",'<label>Nova senha (mínimo 8 caracteres)</label><input id="adm_np1" type="password" autocomplete="new-password"><label>Repita a nova senha</label><input id="adm_np2" type="password" autocomplete="new-password"><div id="adm_npmsg"></div><div class="row"><button class="btn sec" onclick="trocarSenha()">Trocar senha</button></div>')+
+   '<div class="row"><button class="btn sec" onclick="sairAdmin()">Sair da área do síndico</button></div>'+
    '<div class="admbar"><div class="st" id="adm_st">'+esc(adm.msg||"Altere o que precisar e salve.")+'</div><button class="btn" onclick="salvarTudo()">'+ic("ok",18)+'Salvar alterações</button></div>';
 }
 
